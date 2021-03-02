@@ -9,15 +9,14 @@ DisableDebuggerAttachment 0
 DataDirectoryGroupReadable 1
 
 ORPort 9029
-ORPort [2a01:4f9:c010:dcc2::1]:9029 nolisten
+ORPort [2a01:4f9:c010:dcc2::1]:9029 NoListen
+ORPort [::1]:9029 NoAdvertise
 Address 95.216.187.91
 
 Nickname Almighty
 RelayBandwidthRate 10 MBytes
 RelayBandwidthBurst 10 MBytes
 ContactInfo Almighty <arpitjindal1997@hotmail.com>
-
-ExitRelay 0
 
 DirPort 95.216.187.91:9030 NoListen
 DirPort 9030 NoAdvertise
@@ -27,12 +26,19 @@ DirPort 9030 NoAdvertise
 AvoidDiskWrites 1
 
 ## For Relay Node
-# ExitRelay 0
-# BridgeRelay 0
+#ExitRelay 0
+#BridgeRelay 0
 
 ## For Exit Node
-# ExitRelay 1
-# BridgeRelay 0
+#ExitRelay 1
+IPv6Exit 1
+ExitPolicy accept *:53        # DNS
+ExitPolicy accept *:80        # HTTP
+ExitPolicy accept *:443       # HTTPS
+ExitPolicy accept6 *:*
+ExitPolicy reject *:*
+
+BridgeRelay 0
 
 ## For Bridge Node
 # BridgeRelay 1
