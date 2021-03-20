@@ -1,32 +1,46 @@
-version: '2.1'
+version: '2.2'
 services:
   tor:
+    cpus: '0.5'
+    mem_limit: '400mb'
     image: arpitjindal1997/myst-multiarch:tor
     cap_add:
-     - NET_ADMIN
-     - SYS_MODULE
+      - NET_ADMIN
+      - SYS_MODULE
     sysctls:
-     - net.ipv6.conf.all.disable_ipv6=0
-     - net.ipv6.conf.all.forwarding=1
+      - net.ipv6.conf.all.disable_ipv6=0
+      - net.ipv6.conf.all.forwarding=1
     environment:
-     - WG_COLOR_MODE=always
-     - LOG_LEVEL=info
+      - WG_COLOR_MODE=always
+      - LOG_LEVEL=info
     ports:
-     - 9029:9029/tcp
-     - 9030:9030/tcp
+      - 9029:9029/tcp
+      - 9030:9030/tcp
     privileged: true
     volumes:
-     - ./tor:/var/lib/tor
-     - ./torrc:/etc/tor/torrc
-    networks:
-      app_net:
-        ipv6_address: 2001:3200:3100::20
-networks:
-  app_net:
-    enable_ipv6: true
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 2001:3200:3100::/64
-          gateway: 2001:3200:3100::1
+      - ./tor:/var/lib/tor
+      - ./torrc:/etc/tor/torrc
+    environment:
+      - VPN=false
+#      - SERVER=us5555.nordvpn.com
+#      - USER=
+#      - PASS=
+    dns:
+      - 94.140.14.14
+      - 45.90.28.101
+      - 1.1.1.1
+    network_mode: bridge
+
+# Uncomment if docker is not configured with IPv6
+#    networks:
+#      app_net:
+#        ipv6_address: 2001:3200:3100::20
+#networks:
+#  app_net:
+#    enable_ipv6: true
+#    driver: bridge
+#    ipam:
+#      driver: default
+#      config:
+#        - subnet: 2001:3200:3100::/64
+#          gateway: 2001:3200:3100::1
