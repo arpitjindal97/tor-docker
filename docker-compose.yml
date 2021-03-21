@@ -22,7 +22,8 @@ services:
       - ./torrc:/etc/tor/torrc
     environment:
       - VPN=false
-#      - SERVER=us5555.nordvpn.com
+#      - SERVER_HOST=us5555.nordvpn.com
+#      - SERVER_IP=98.98.98.98
 #      - USER=
 #      - PASS=
     dns:
