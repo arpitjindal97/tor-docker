@@ -22,12 +22,13 @@ services:
       - ./torrc:/etc/tor/torrc
     environment:
       - VPN=false
-#      - SERVER_HOST=us5555.nordvpn.com
-#      - SERVER_IP=98.98.98.98
-#      - USER=
-#      - PASS=
+      - SERVER_HOST=ba11.nordvpn.com
+      - SERVER_IP=185.99.3.20
+      - USER=
+      - PASS=
     dns:
       - 94.140.14.14
+      - 94.140.15.15
       - 45.90.28.101
       - 1.1.1.1
     network_mode: bridge

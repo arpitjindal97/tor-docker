@@ -21,8 +21,9 @@ RUN chown -R root /var/lib/tor
 #USER tor
 
 # It is good idea to run Exit Node on VPN
-RUN apk add strongswan openssl
-RUN wget https://downloads.nordcdn.com/certificates/root.der -O /etc/ipsec.d/cacerts/NordVPN.der
+RUN apk add strongswan openssl curl
+RUN curl -s -L -o /etc/ipsec.d/cacerts/NordVPN.der https://downloads.nordcdn.com/certificates/root.der
+RUN curl -s -L -o /etc/ipsec.d/cacerts/ProtonVPN.der http://protonvpn.com/download/ProtonVPN_ike_root.der
 COPY ipsec.conf /etc/ipsec.conf
 COPY run.sh /root/run.sh
 RUN chmod +x /root/run.sh
