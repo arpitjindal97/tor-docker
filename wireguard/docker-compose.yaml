@@ -1,0 +1,22 @@
+version: '2.1'
+services:
+  wireguard:
+    image: temp:latest
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    environment:
+      - WG_COLOR_MODE=always
+      - LOG_LEVEL=info
+    ports:
+      - 9051:9051/tcp
+      - 51820:51820/udp
+    volumes:
+      - ./wg0.conf:/etc/wireguard/wg0.conf
+      - ./tor:/var/lib/tor
+      - ./torrc:/etc/tor/torrc
+    privileged: true
+    dns:
+      - 1.1.1.1
